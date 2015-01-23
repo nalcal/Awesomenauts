@@ -10,7 +10,9 @@ game.resources = [
         //name is meta tiles
         //in data then img then meta tiles
         {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
-
+        //name is player
+        //in data then img then orcSpear
+        {name: "player", type:"image", src: "data/img/orcSpear.png"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
