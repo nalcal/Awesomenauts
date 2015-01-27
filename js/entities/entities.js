@@ -19,7 +19,7 @@ game.PlayerEntity = me.Entity.extend({
                 }
         }]);
         //sets the velocity to 5 and 0
-        this.body.setVelocity(5, 0);
+        this.body.setVelocity(5, 20);
         
     },
     
