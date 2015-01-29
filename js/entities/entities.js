@@ -20,7 +20,13 @@ game.PlayerEntity = me.Entity.extend({
         }]);
         //sets the velocity to 5 and 0
         this.body.setVelocity(5, 20);
-        
+        //adding animation
+        //idle is 78
+        //walk is 117, 119, 120, 121, 122, 123, 124, 125], 80
+        this.renderable.addAnimation("idle", [78]);
+        this.renderable.addAnimation("walk", [117, 119, 120, 121, 122, 123, 124, 125], 80);
+        //renderable is idle 78
+        this.renderable.setCurrentAnimation("idle");     
     },
     
     update: function(delta){
