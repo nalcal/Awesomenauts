@@ -12,12 +12,17 @@
   <image source="../img/meta-tiles.png" width="350" height="70"/>
   <tile id="1">
    <properties>
-    <property name="lslope" value=""/>
+    <property name="type" value="lslope"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="rslope" value=""/>
+    <property name="type" value="rslope"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="type" value="solid"/>
    </properties>
   </tile>
  </tileset>
