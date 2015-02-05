@@ -13,6 +13,9 @@ game.resources = [
         //name is player
         //in data then img then orcSpear
         {name: "player", type:"image", src: "data/img/orcSpear.png"},
+        //name is tower
+        //in data then img then tower_round
+        {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
