@@ -20,6 +20,8 @@ game.PlayerEntity = me.Entity.extend({
         }]);
         //sets the velocity to 5 and 0
         this.body.setVelocity(5, 20);
+        //keep the direction of the player going right
+        this.facing = "right";
         me.game.viewpore.follow(this.pos, me.game.viewport.AXIS.BOTH);
         //adding animation
         //idle is 78
@@ -37,9 +39,11 @@ game.PlayerEntity = me.Entity.extend({
             //setvelocity() and multiplying it by timer tick
             //me.timer.tick makes the movement look smooth
             this.body.vel.x += this.body.accel.x * me.timer.tick;
+            this.facing = "right";
             this.flipX(true);
         }
     }else if(this.body.vel.x !==0){
+            this.facing = "left";
             //can see what the guy is doing
             if(!this.renderable.isCurrentAnimation("walk")){
             this.renderable.setCurrentAnimation("walk");
@@ -61,10 +65,28 @@ game.PlayerEntity = me.Entity.extend({
         //,make him stop moving a lot
         //the body is update to delta
         //the return is true
+        me.collision.check(this, true, this.collideMandler.bind(this), true);
         this.body.update(delta);
         //updating our image
         this._super(me.Entity, "update", [delta]);
         return true;
+    },
+    
+    collideHandler: function(response){
+        if(response.b.type==='EnemyBaseEntity'){
+          var ydif = this.pos.y - response.b.pos.y;
+          var xdif = this.pos.x - response.b.pos.x;
+          
+          console.log("xdif " + xdif + " ydif " + ydif);
+          
+          if(xdif>-35 && this.facing==='right' && (xdif<0)){
+           this.body.vel.x = 0;
+           this.pos.x = this.pos.x -1;
+       }else if(xdif<60 && this facing==='left' && (xdif>0))
+           this.body.vel.x = 0;
+           this.pos.x = this.pos.x +1;
+          }
+      }
     }
 });
 //adding the towers 
