@@ -26,6 +26,7 @@ game.PlayerEntity = me.Entity.extend({
         //walk is 117, 119, 120, 121, 122, 123, 124, 125], 80
         this.renderable.addAnimation("idle", [78]);
         this.renderable.addAnimation("walk", [117, 119, 120, 121, 122, 123, 124, 125], 80);
+        this.renderable.addAnimation("attack", [65, 66, 67, 69, 70, 71, 72], 80);
         //renderable is idle 78
         this.renderable.setCurrentAnimation("idle");     
     },
@@ -37,12 +38,9 @@ game.PlayerEntity = me.Entity.extend({
             //me.timer.tick makes the movement look smooth
             this.body.vel.x += this.body.accel.x * me.timer.tick;
             this.flipX(true);
-           
-        }else{
-            //sets the body to vel x 0
-            this.body.vel.x = 0;
         }
-        if(this.body.vel.x !==0){
+    }
+        else if(this.body.vel.x !==0){
             //can see what the guy is doing
             if(!this.renderable.isCurrentAnimation("walk")){
             this.renderable.setCurrentAnimation("walk");
@@ -50,6 +48,17 @@ game.PlayerEntity = me.Entity.extend({
     }else{
       this.renderable.setCurrentAnimation("idle");  
     }
+     if(me.input.isKeyPressed("attack")){
+            if(!this.renderable.isCurrentAnimation("attack")){
+                console.log(!this.renderable.isCurrentAnimation("attack"));
+                //sets the current animation to attack and once that is over
+                //goes back to the idle animation
+                this.renderable.setCurrentAnimation("attack", "idle");
+                //makes it so that the next time we start this sequence begin
+                //switched to another animation
+                this.renderable.setAnimationFrame();
+            }
+        }
         //,make him stop moving a lot
         //the body is update to delta
         //the return is true
