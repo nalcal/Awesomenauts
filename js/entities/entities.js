@@ -101,7 +101,6 @@ game.PlayerEntity = me.Entity.extend({
 });
 //adding the towers 
 //player entity is extend
-game.PlayerEntity = me.Entity.extend(   );
 //image is tower//both letters have to be capitual
 //in the bracets you do the work
 //melon js uses the init function
@@ -152,3 +151,37 @@ game.EnemyBaseEntity = me.Entity.extend({
         
     }
 });
+
+game.EnemyCreep = me.Entity.extend({
+    init: function(x, y, settings){
+        this.super(me.Entity, 'init', [x, y,{
+                image: "creep1",
+                width: 32,
+                height: 64, 
+                spritewidth: "12",
+                spriteheight: "64",
+                getShape: function(){
+                    return(new me.Rect(0, 0, 32, 64)).toPolygon();
+                }
+                   //sets the velocity to 5 and 0
+        this.body.setVelocity(5, 20);
+        //keep the direction of the player going right
+        this.facing = "right";
+        me.game.viewpore.follow(this.pos, me.game.viewport.AXIS.BOTH);
+        //adding animation
+        //idle is 78
+        //walk is 117, 119, 120, 121, 122, 123, 124, 125], 80
+        this.renderable.addAnimation("idle", [78]);
+        this.renderable.addAnimation("walk", [117, 119, 120, 121, 122, 123, 124, 125], 80);
+        this.renderable.addAnimation("attack", [65, 66, 67, 69, 70, 71, 72], 80);
+        //renderable is idle 78
+        this.renderable.setCurrentAnimation("idle");     
+    },
+        }]);   
+    }])
+});
+    //updated the function
+    update: function(){
+    
+    }
+    });

@@ -43,9 +43,11 @@ var game = {
                 //adding the player to the game
                 me.pool.register("player", game.PlayerEntity, true);
                 //register the entites page    
-                me.pool.register("PlayerBase", game.PlayerBaseEntity)
-		me.pool.register("EnemyBase", game.EnemyBaseEntity)
-                
+                me.pool.register("PlayerBase", game.PlayerBaseEntity);
+                //register the entites page
+		me.pool.register("EnemyBase", game.EnemyBaseEntity);
+                //register the entites page
+                me.pool.register("EntityCreep", game.EntityCreep, true);
                 me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
