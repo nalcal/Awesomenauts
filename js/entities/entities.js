@@ -92,8 +92,11 @@ game.PlayerEntity = me.Entity.extend({
        }else if(xdif<60 && this facing==='left' && (xdif>0))
            this.body.vel.x = 0;
            this.pos.x = this.pos.x +1;
-      
       }
+      //adding a renderable
+      //current animation is attack
+      if(this.renderable.isCurrentAnimation("attack")){
+          response.b.lossellealth();
     }
 });
 //adding the towers 
