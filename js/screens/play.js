@@ -1,46 +1,42 @@
 game.PlayScreen = me.ScreenObject.extend({
-	/**
-	 *  action to perform on state change
-	 */
-	onResetEvent: function() {
-		// reset the score
-		game.data.score = 0;
-                //added a level director
-                //added a laod level
-                //level01
+        /**
+         *  action to perform on state change
+         */
+        onResetEvent: function() {
+                // reset the score
+                game.data.score = 0;
+
+
+                //loads level
                 me.levelDirector.loadLevel("level01");
-                //adding the player
-                //x is were he is starting
-                //y is were he is empty settings
-                //adding him to the world
+                //pulls the player entity from the pool
                 var player = me.pool.pull("player", 0, 420, {});
+                //adds him to the game and sets his layer-level
                 me.game.world.addChild(player, 5);
-                //var gamer timer
-                var gamemanager = me.pool.pull("GameManager", 0, 0, ());
+                //adds gamemanager to world
+                var gamemanager = me.pool.pull("GameManager", 0 , 0, {});
+                //puts gamemanager into world
                 me.game.world.addChild(gamemanager, 0);
-                //this is the key
-                //the bind key
-                //the key to the right
+                //makes the right key into a variable
                 me.input.bindKey(me.input.KEY.RIGHT, "right");
-                //to make him go left
+                //makes the right key into a variable
                 me.input.bindKey(me.input.KEY.LEFT, "left");
-                //to make him jump
-                me.input.bindKey(me.input.KEY.SPACE, "jump");
-                //this is the key
-                //the bind key
-                //the key to the attack
-                me.input.bindKey(me.input.key.A, "attack");
-		// add our HUD to the game world
-		this.HUD = new game.HUD.Container();
-		me.game.world.addChild(this.HUD);
-	},
+                //makes the up key into a variable
+                me.input.bindKey(me.input.KEY.UP, "jump");
+                //makes an attack key
+                me.input.bindKey(me.input.KEY.A, "attack");
+
+                // add our HUD to the game world
+                this.HUD = new game.HUD.Container();
+                me.game.world.addChild(this.HUD);
+        },
 
 
-	/**
-	 *  action to perform when leaving this screen (state change)
-	 */
-	onDestroyEvent: function() {
-		// remove the HUD from the game world
-		me.game.world.removeChild(this.HUD);
-	}
+        /**
+         *  action to perform when leaving this screen (state change)
+         */
+        onDestroyEvent: function() {
+                // remove the HUD from the game world
+                me.game.world.removeChild(this.HUD);
+        }
 });

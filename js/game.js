@@ -12,6 +12,7 @@ var game = {
 	// Run on page load.
 	"onload" : function () {
 	// Initialize the video.
+	//sets the height and width of the screen
 	if (!me.video.init("screen",  me.video.CANVAS, 1067, 600, true, '1.0')) {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
@@ -39,16 +40,18 @@ var game = {
 
 	// Run on game resources loaded.
 	"loaded" : function () {
-                //adding him to the pool
-                //adding the player to the game
-                me.pool.register("player", game.PlayerEntity, true);
-                //register the entites page    
-                me.pool.register("PlayerBase", game.PlayerBaseEntity);
-                //register the entites page
+		//adds player to pool
+		me.pool.register("player", game.PlayerEntity, true);
+		//adds player base to pool
+		me.pool.register("PlayerBase", game.PlayerBaseEntity);
+		//adds enemy base to pool
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
-                //register the entites page
-                me.pool.register("EntityCreep", game.EntityCreep, true);
-                me.state.set(me.state.MENU, new game.TitleScreen());
+		//adds enemy creep to pool
+		me.pool.register("EnemyCreep", game.EnemyCreep, true);
+		//registers oblject
+		me.pool.register("GameManager", game.GameManager);
+
+		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
 		// Start the game.
