@@ -71,21 +71,28 @@ game.PlayerEntity = me.Entity.extend({
         this._super(me.Entity, "update", [delta]);
         return true;
     },
-    
+    //collide handler
     collideHandler: function(response){
         if(response.b.type==='EnemyBaseEntity'){
           var ydif = this.pos.y - response.b.pos.y;
           var xdif = this.pos.x - response.b.pos.x;
-          
+          //console log is xdif
           console.log("xdif " + xdif + " ydif " + ydif);
-          
+          //if is -35
+          //it is on the right
+          //it is ydif and xdif
+          //the body vel is -1
+           }else if(ydif<-40){
+           this.body.falling = false;
+           this.body.vel.y = -1;
+          }
           if(xdif>-35 && this.facing==='right' && (xdif<0)){
            this.body.vel.x = 0;
            this.pos.x = this.pos.x -1;
        }else if(xdif<60 && this facing==='left' && (xdif>0))
            this.body.vel.x = 0;
            this.pos.x = this.pos.x +1;
-          }
+      
       }
     }
 });
