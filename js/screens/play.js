@@ -19,6 +19,10 @@ game.PlayScreen = me.ScreenObject.extend({
                 //the bind key
                 //the key to the right
                 me.input.bindKey(me.input.KEY.RIGHT, "right");
+                //to make him go left
+                me.input.bindKey(me.input.KEY.LEFT, "left");
+                //to make him jump
+                me.input.bindKey(me.input.KEY.SPACE, "jump");
                 //this is the key
                 //the bind key
                 //the key to the attack

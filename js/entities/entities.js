@@ -15,7 +15,7 @@ game.PlayerEntity = me.Entity.extend({
                 spritewidth: "64",
                 spriteheight: "64",
                 getShape: function(){
-                    return(new me.Rect(0, 0, 64, 64)).toPolygon();
+                    return(new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
         }]);
         //sets the velocity to 5 and 0
@@ -39,8 +39,7 @@ game.PlayerEntity = me.Entity.extend({
             this.body.vel.x += this.body.accel.x * me.timer.tick;
             this.flipX(true);
         }
-    }
-        else if(this.body.vel.x !==0){
+    }else if(this.body.vel.x !==0){
             //can see what the guy is doing
             if(!this.renderable.isCurrentAnimation("walk")){
             this.renderable.setCurrentAnimation("walk");
@@ -88,7 +87,7 @@ game.EnemyBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return(new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return(new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
         }]);
         this.broken = false;
