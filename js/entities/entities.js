@@ -20,6 +20,7 @@ game.PlayerEntity = me.Entity.extend({
         }]);
         //sets the velocity to 5 and 0
         this.body.setVelocity(5, 20);
+        me.game.viewpore.follow(this.pos, me.game.viewport.AXIS.BOTH);
         //adding animation
         //idle is 78
         //walk is 117, 119, 120, 121, 122, 123, 124, 125], 80
@@ -49,8 +50,7 @@ game.PlayerEntity = me.Entity.extend({
     }else{
       this.renderable.setCurrentAnimation("idle");  
     }
-    //,make him stop moving a lot
-        
+        //,make him stop moving a lot
         //the body is update to delta
         //the return is true
         this.body.update(delta);
@@ -88,13 +88,19 @@ game.EnemyBaseEntity = me.Entity.extend({
         this.body.onCollision = this.onCollision.bind(this);
         //playerBaseEntity
         this.type = "EnemyBaseEntity";
-      //updated the function  
+        //updated the function  
+        this.renderable.addAnimation("idle", [0]);
+        //t set animation
+        this.renderable.addAnimation("broken", [1]);
+        //set animation
+        this.renderable.setCurrentAnimation("idle");
     },
     //have an collision function
     //and then it will colision
     update:function(delta){
         if(this.health<=0){
-            this.brown = true;
+            this.broken = true;
+            this.renderable.setCurrentAnimation("broken");
         }
         this.body.update(delta);
         

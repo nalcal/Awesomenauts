@@ -39,11 +39,14 @@ var game = {
 
 	// Run on game resources loaded.
 	"loaded" : function () {
-            //adding him to the pool
-            //adding the player to the game
+                //adding him to the pool
+                //adding the player to the game
                 me.pool.register("player", game.PlayerEntity, true);
-            
-		me.state.set(me.state.MENU, new game.TitleScreen());
+                //register the entites page    
+                me.pool.register("PlayerBase", game.PlayerBaseEntity)
+		me.pool.register("EnemyBase", game.EnemyBaseEntity)
+                
+                me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
 		// Start the game.
