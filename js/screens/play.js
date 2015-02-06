@@ -15,6 +15,9 @@ game.PlayScreen = me.ScreenObject.extend({
                 //adding him to the world
                 var player = me.pool.pull("player", 0, 420, {});
                 me.game.world.addChild(player, 5);
+                //var gamer timer
+                var gamemanager = me.pool.pull("GameManager", 0, 0, ());
+                me.game.world.addChild(gamemanager, 0);
                 //this is the key
                 //the bind key
                 //the key to the right

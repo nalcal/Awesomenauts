@@ -151,7 +151,16 @@ game.EnemyBaseEntity = me.Entity.extend({
         
     }
 });
-
+//adding the towers 
+//player entity is extend
+//image is tower//both letters have to be capitual
+//in the bracets you do the work
+//melon js uses the init function
+//function is x and y
+//super reaching to to conductor of the entity
+//image is 64 and width is 64
+//it returns to polygon
+//updates function
 game.EnemyCreep = me.Entity.extend({
     init: function(x, y, settings){
         this.super(me.Entity, 'init', [x, y,{
@@ -185,3 +194,20 @@ game.EnemyCreep = me.Entity.extend({
     
     }
     });
+//made a game manager
+//adding the towers 
+//player entity is extend
+//image is tower//both letters have to be capitual
+//in the bracets you do the work
+//melon js uses the init function
+//function is x and y
+//super reaching to to conductor of the entity
+//image is 64 and width is 64
+//it returns to polygon
+//updates function
+game.GameManager = Object.extend{(
+    init: function(x, y, settings){
+        update: function(){
+    
+    }
+});
