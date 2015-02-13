@@ -191,27 +191,6 @@ game.PlayerBaseEntity = me.Entity.extend({
     },  
 
 
-    update:function(delta){
-        //runs if health is less than or equal to 0
-        if(this.health<=0){
-            //makes the tower "broken"
-            this.broken = true;
-            //sets animation for "broken"
-            this.renderable.setCurrentAnimation("broken");
-        } 
-        //updates tower status
-        this.body.update(delta);
-        //updates
-        this._super(me.Entity, "update", [delta]);
-        return true;
-    },
-    //function that runs when base is touched
-    update: function(delta){
-        this.body.update(delta);
-
-    }
-});
-
 
 //tower class
 game.EnemyBaseEntity = me.Entity.extend({
