@@ -183,7 +183,34 @@ game.PlayerBaseEntity = me.Entity.extend({
         this.type = "PlayerBaseEntity";
         //adds the defualt animatin for the game
         this.renderable.addAnimation("idle", [0]);
-   
+        //adds the animation for when the tower is broken
+        this.renderable.addAnimation("broken", [1]);
+        //sets the desfault animation
+        this.renderable.setCurrentAnimation("idle");
+
+    },  
+
+
+    update:function(delta){
+        //runs if health is less than or equal to 0
+        if(this.health<=0){
+            //makes the tower "broken"
+            this.broken = true;
+            //sets animation for "broken"
+            this.renderable.setCurrentAnimation("broken");
+        } 
+        //updates tower status
+        this.body.update(delta);
+        //updates
+        this._super(me.Entity, "update", [delta]);
+        return true;
+    },
+    //function that runs when base is touched
+    update: function(delta){
+        this.body.update(delta);
+
+    }
+});
 
 
 //tower class
