@@ -22,9 +22,11 @@ game.PlayerEntity = me.Entity.extend ({
         //allows player to be interacted with
         this.type = "PlayerEntity";
         //sets the player's health to 100
-        this.health = 20;
+        this.health = game.data.playerHealth;
+        //says the player is not dead
+        this.death = false;
         //sets movemet speed. allows player to move horizantally and vertically
-        this.body.setVelocity(5, 20);
+        this.body.setVelocity(game.data.playerMoveSpeed, 20);
         //keeps track of which way the character is going
         this.facing = "right";
         //variable for keeping track of time and date
@@ -50,6 +52,11 @@ game.PlayerEntity = me.Entity.extend ({
     update: function(delta){
         //keeps timer updated
         this.now = new Date().getTime();
+        //runa when player's health reaches 0
+        if (this.health <= 0) {
+            //says player is dead
+            this.dead = true;
+        }
         //runs if the right key is pressed
         if(me.input.isKeyPressed("right")){
             //when right key is pressed, adds to the position of my x by the velocity defined above in setVelocity and multiplying it by me.timer.tick
@@ -148,16 +155,16 @@ game.PlayerEntity = me.Entity.extend ({
                 //moves player slightly away from tower
                 this.pos.x = this.pos.x +1;
             }
-            //runs if the player is attacking and its been 400 milliseconds since the last hit
-            if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000
+            //runs if the player is attacking and its been 1000 milliseconds since the last hit
+            if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
                 //and if the y difference is less than 41
                 && (Math.abs(ydif) <= 40) &&
                 //and if the player is facing the creep's baack or front
                 ((xdif > 0 ) && this.facing === "left") || ((xdif < 0) && this.facing === "right")) {
                 //so the computer knows th eplayer just hit the tower
                 this.lastHit = this.now;
-                //calls the loseHealth function
-                response.b.loseHealth();
+                //calls the loseHealth function and sets the parameter to the playerAttack variable
+                response.b.loseHealth(game.data.playerAttack);
             }
         }
         //runs if the player collides with the enemy creep
@@ -187,11 +194,11 @@ game.PlayerEntity = me.Entity.extend ({
             }
             //runs the loseHealth function only if the player is attacking the enemy creep
             //can only take one life point per second
-            if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000) {
+            if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer) {
                 //updates the timer
                 this.lastHit = this.now;
                 //calls the loseHealth function with a parameter of 1
-                response.b.loseHealth(1);
+                response.b.loseHealth(game.data.playerAttack);
             }
         }
     }
@@ -221,7 +228,7 @@ game.PlayerBaseEntity = me.Entity.extend({
         //says that tower hasn't been destroyed
         this.broken = false;
         //gives tower a "health" of ten
-        this.health = 10;
+        this.health = game.data.playerBaseHealth;
         //makes sure the tower's status is always updating, eben when it isn't on the map
         this.alwaysUpdate = true;
         //makes teh tower collidable
@@ -287,7 +294,7 @@ game.EnemyBaseEntity = me.Entity.extend({
         //says that tower hasn't been destroyed
         this.broken = false;
         //gives tower a "health" of ten
-        this.health = 10;
+        this.health = game.data.enemyBaseHealth;
         //makes sure the tower's status is always updating, eben when it isn't on the map
         this.alwaysUpdate = true;
         //makes the tower collidable
@@ -348,7 +355,7 @@ game.EnemyCreep = me.Entity.extend({
                 }
             }]);
             //sets health to ten
-            this.health = 10;
+            this.health = game.data.enemyCreepHealth;
             //makes the creep's satus continuosly update
             this.alwaysUpdate = true;
             //says the creep is not attacking
@@ -404,11 +411,11 @@ game.EnemyCreep = me.Entity.extend({
                 //pushes the creep back a little to maintain its position
                 this.pos.x = this.pos.x + 1;
                 //Only allows the creep to hit the tower once every second
-                if ((this.now - this.lastHit >= 1000)) {
+                if ((this.now - this.lastHit >= game.data.creepAttackTimer)) {
                     //updates the lastHit timer
                     this.lastHit = this.now;
                     //runs the losehealth function, with 1 point damage
-                    response.b.loseHealth(1);
+                    response.b.loseHealth(game.data.enemyCreepAttack);
                 }
             }
             else if (response.b.type === 'PlayerEntity') {
@@ -427,11 +434,11 @@ game.EnemyCreep = me.Entity.extend({
                     this.pos.x = this.pos.x + 1;
                 }
                 //Only allows the creep to hit the tower once every second and if the player is not behind the creep
-                if ((this.now - this.lastHit >= 1000) && xdif > 0) {
+                if ((this.now - this.lastHit >= game.data.creepAttackTimer) && xdif > 0) {
                     //updates the lastHit timer
                     this.lastHit = this.now;
                     //runs the losehealth function, with 1 point damage
-                    response.b.loseHealth(1);
+                    response.b.loseHealth(game.data.enemyCreepAttack);
                 }
             }
         }
@@ -463,7 +470,7 @@ game.FriendCreep = me.Entity.extend({
                 }
             }]);
             //sets health to ten
-            this.health = 10;
+            this.health = game.data.friendCreepHealth;
             //makes the creep's satus continuosly update
             this.alwaysUpdate = true;
             //says the creep is not attacking
@@ -512,11 +519,11 @@ game.FriendCreep = me.Entity.extend({
                 //pushes the creep back a little to maintain its position
                 this.pos.x = this.pos.x - 1;
                 //Only allows the creep to hit the tower once every second
-                if ((this.now - this.lastHit >= 1000)) {
+                if ((this.now - this.lastHit >= game.data.friendCreepAttack)) {
                     //updates the lastHit timer
                     this.lastHit = this.now;
                     //runs the losehealth function, with 1 point damage
-                    response.b.loseHealth(1);
+                    response.b.loseHealth(game.data.friendCreepAttack);
                 }
             }
             // else if (response.b.type === 'EnemyCreep') {
@@ -535,11 +542,11 @@ game.FriendCreep = me.Entity.extend({
             //      this.pos.x = this.pos.x - 1;
             //  }
             //  //Only allows the creep to hit the tower once every second and if the player is not behind the creep
-            //  if ((this.now - this.lastHit >= 1000) && xdif > 0) {
+            //  if ((this.now - this.lastHit >= game.data.friendCreepAttackTimer) && xdif > 0) {
             //      //updates the lastHit timer
             //      this.lastHit = this.now;
             //      //runs the losehealth function, with 1 point damage
-            //      response.b.loseHealth(1);
+            //      response.b.loseHealth(game.data.friendCreepAttack);
             //  }
             // }
         }
@@ -564,16 +571,23 @@ game.GameManager = Object.extend({
     update: function(){
         //keeps track of timer
         this.now = new Date().getTime();
+        //runs if player is dead
+        if(game.data.player.dead){
+            //takes the player off the screen
+            me.game.world.removeChild(game.data.player);
+            //runs the resetPlayer function
+            me.state.current().resetPlayer(10, 0);
+
+        }
         //checks to make sure there is a multiple of ten. makes sure its been at least a second since last creep has been made
         if(Math.round(this.now/1000)%10 === 0 && (this.now - this.lastCreep >= 1000)){
             //updates timer
             this.lastCreep = this.now;
-            //creates and inserts creep into worls
+            //creates and inserts creeps into world
             var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
             var creepf = me.pool.pull("FriendCreep", 0, 0, {});
-            //adds the creeps to the worls
+            //adds the creeps to the world
             me.game.world.addChild(creepe, 5);
-            //
             me.game.world.addChild(creepf, 5);
         }
         //updates
