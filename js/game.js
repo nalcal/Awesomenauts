@@ -6,6 +6,7 @@ var game = {
 	data : {
 		// score
 		score : 0,
+		paused: false,
 		enemyBaseHealth : 10,
 		playerBaseHealth: 10,
 		enemyCreepHealth: 10,
@@ -19,7 +20,14 @@ var game = {
 		playerMoveSpeed: 8,
 		creepMoveSpeed: 5,
 		gameManager: "",
-		player: ""
+		player: "",
+		enemyHero: "",
+		exp: 0,
+		gold: 0,
+		exp1: 0,
+		exp2: 0,
+		exp3: 0,
+		exp4: 0
 	},
 	
 	
@@ -58,6 +66,8 @@ var game = {
 		me.pool.register("player", game.PlayerEntity, true);
 		//adds player base to pool
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
+		//adds enemy hero base to pool
+		me.pool.register("EnemyHero", game.EnemyHeroEntity, true);
 		//adds enemy base to pool
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		//adds enemy creep to pool
@@ -69,8 +79,13 @@ var game = {
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//pause hack
+		//me.state.set(me.state.PAUSE, new game.PauseScreen());
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 
-		// Start the game.
-		me.state.change(me.state.TitleScreen);
+		// Start the game with the title screen
+		me.state.change(me.state.MENU);
 	}
 };
