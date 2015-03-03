@@ -3,7 +3,7 @@ game.PlayerEntity = me.Entity.extend ({
     //constructor function 
     init: function(x, y, settings){
         //opens up a function for each set class 
-        this.setSuper();
+        this.setSuper(x, y);
         this.setPlayerTimers();
         this.setAttributes();
 
@@ -78,7 +78,7 @@ game.PlayerEntity = me.Entity.extend ({
         //keeps timer updated
         this.now = new Date().getTime();
 
-        this.dead = checkIfDead();
+        this.dead = this.checkIfDead();
 
         this.checkKeyPressesAndMove();
 
