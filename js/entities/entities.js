@@ -20,7 +20,7 @@ game.PlayerEntity = me.Entity.extend ({
         this.renderable.setCurrentAnimation("idle");
     },
 
-    setSuper: function(){
+    setSuper: function(x, y){
         //reachers the constructor function for enitity
         this._super(me.Entity, 'init', [x, y, {
             //settings. shoes the player
@@ -120,6 +120,7 @@ game.PlayerEntity = me.Entity.extend ({
         if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
             this.jump();
         }
+    },
 
         setAnimation: function(){
             //runs if the attack key is pressed
@@ -145,10 +146,7 @@ game.PlayerEntity = me.Entity.extend ({
             //gives the player the idle animation
             this.renderable.setCurrentAnimation("idle");
         }
-        },
-
-        this.attacking = me.input.isKeyPressed("attack");
-
+                this.attacking = me.input.isKeyPressed("attack");
     },
 
     moveRight: function(){
