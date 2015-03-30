@@ -135,6 +135,35 @@ game.SpendGold = Object.extend({
         game.data.buyscreen.setOpacity(0.8);
         me.game.world.addChild(game.data.buyscreen, 34);
         game.data.player.body.setVelocity(0, 0);
+        //binds the F keys that we need 
+        me.input.bindKey(me.input.KEY.F1, "F1", true);
+        me.input.bindKey(me.input.KEY.F2, "F2", true);
+        me.input.bindKey(me.input.KEY.F3, "F3", true);
+        me.input.bindKey(me.input.KEY.F4, "F4", true);
+        me.input.bindKey(me.input.KEY.F5, "F5", true);
+        me.input.bindKey(me.input.KEY.F6, "F6", true);
+        this.setBuyText();
+    },
+
+    setBuyText: function(){
+        game.data.buytext = new (me.Renderable.extend({
+            init: function(){
+                //renders the text
+                this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
+                //font and font color
+                this.font = new me.Font("Arial", 26, "white");
+                this.updateWhenPaused = true;
+                this.alwaysUpdate = true;
+            },
+
+            draw: function(renderer){
+                //sets the position on the screen for the text
+                //how to purchase upgrades
+                this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, B TO EXIT", this.pos.x, this.pos.y);
+            },
+        }));
+    //when text is bought the purchase is added to the game
+    me.game.world.addChild(game.data.buytext, 35);
 
     },
 
@@ -142,5 +171,14 @@ game.SpendGold = Object.extend({
         this.buying = false;
         game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
         me.state.resume(me.state.PLAY);
+        //unbinds all of the F keys that we need 
+        me.input.unbindKey(me.input.KEY.F1, "F1", true);
+        me.input.unbindKey(me.input.KEY.F2, "F2", true);
+        me.input.unbindKey(me.input.KEY.F3, "F3", true);
+        me.input.unbindKey(me.input.KEY.F4, "F4", true);
+        me.input.unbindKey(me.input.KEY.F5, "F5", true);
+        me.input.unbindKey(me.input.KEY.F6, "F6", true);
+        //allows the text to be bought in game
+        me.game.world.removeChild(game.data.buytext);
     }
 });
