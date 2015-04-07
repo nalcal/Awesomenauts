@@ -1,6 +1,6 @@
 <?php
 //Looks for config.php 
- require_once(__DIR__ . "/../model/config.php");
+ require_once(__DIR__ . "/../Model/config.php");
 		// creates a database for the users
 		$query = $_SESSION["connection"]->query("CREATE TABLE users("
 			. "id int(11) NOT NULL AUTO_INCREMENT,"

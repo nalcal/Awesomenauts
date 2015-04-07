@@ -4,24 +4,49 @@ game.resources = [
 	 * @example
 	 * {name: "example", type:"image", src: "data/img/example.png"},
 	 */
-	 // loads our background tiles
-	 {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
-	 // loads meta-tiles
-	 {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
-	 // loads the character
-	 {name: "player", type:"image", src: "data/img/orcSpear.png"},
-	 //loads the tower
-	 {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
-	 //loads the image for our creep/ enemy
-	 {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
-	 // loads player 2s image
-	 {name: "Player2", type:"image", src: "data/img/gloop.png"},
-	 //loads title screen picture in the background
-	 {name: "title-screen", type:"image", src: "data/img/title.png"},
-	 {name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
-	 {name: "gold-screen", type:"image", src: "data/img/spend.png"},
-	 {name: "load-screen", type:"image", src: "data/img/loadpic.png"},
-	 {name: "new-screen", type:"image", src: "data/img/newpic.png"},
+	//loads the background tiles from the data folder, allowing it to display them on the map
+	{name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
+	//loads the background tiles from the data folder, allowing it to display them on the map
+	{name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//custom background
+	//{name: "tree", type:"image", src: "data/img/tree.png"},
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//loads the orc player from the data folder, allowing it to display it on the map
+	{name: "player", type:"image", src: "data/img/orcSpear.png"},
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//enmy hero hack and custom sprite
+	//loads the orc player from the data folder, allowing it to display it on the map
+	{name: "enemyhero", type:"image", src: "data/img/dragonwarrior.png"},
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//loads the tower entity from the data folder, allowing it to display it on the map
+	{name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
+	//loads the brainmonster entity from the data folder, allowing it to display it on the map
+	{name: "creep1", type:"image", src: "data/img/brainmonster.png"},
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//freind creep hack
+	//loads the oneeye entity from the data folder, allowing it to display it on the map
+	{name: "creep2", type:"image", src: "data/img/gloop.png"},
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//loads the title-screen image from the data folder, allowing it to display it on the map
+	{name: "title-screen", type:"image", src: "data/img/skyrim.jpg"},
+	//loads the exp-screen image from the data folder, allowing it to display it on the map
+	{name: "exp-screen", type:"image", src: "data/img/perktree.jpg"},
+	//loads the pause-screen image from the data folder, allowing it to display it on the map
+	{name: "pause-screen", type:"image", src: "data/img/paused.jpg"},
+
+	{name: "load-screen", type:"image", src: "data/img/ebony.jpg"},
+
+	{name: "new-screen", type:"image", src: "data/img/catjit.jpg"},
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
@@ -32,18 +57,19 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.tmx"},
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
- 	 // loads level01 
- 	 {name: "level01", type: "tmx", src: "data/map/test.tmx"},
-	/* Background music. 
-	 * @example
-	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
-	 */
-	 {name: "Zelda Main Theme Song", type: "audio", src: "data/bgm/"},	
+
+ 	//loads the map from the map folder and dislplays it
+ 	{name: "level01", type: "tmx", src: "data/map/test.tmx"},
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//backgorund music hack
+	{name: "AOF", type: "audio", src: "data/bgm/"},
+	{name: "sky", type: "audio", src: "data/bgm/"}
+	
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
-	 {name: "jump", type: "audio", src: "data/sfx/"},
-	 {name: "stomp", type: "audio", src: "data/sfx/"}
 ];
