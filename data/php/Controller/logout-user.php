@@ -1,10 +1,9 @@
 <?php
-	// links logout-user to config.php
-	require_once(_DIR__ . "/../model/config.php");
-	//gets rid of our authenticated login
+	require_once(__DIR__ . "/../model/config.php");
+	//gets rid of authenticated log in
 	unset($_SESSION["authenticated"]);
-    // makes sure that the login remains on the server
+	//destroys session
 	session_destroy();
-	// tells the exact location we want the file to be sent to
-	header("Location: " . $path . "index.php");
+	//redirects user to home.php
+	header("Location: " . $path . "home.php");
 ?>
