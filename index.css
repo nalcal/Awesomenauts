@@ -32,8 +32,17 @@ body {
 	-ms-interpolation-mode: nearest-neighbor;
 }
 
+#input{
+	display: block;
+	text-align: center;
+	visibility: hidden;
+	background-color: red;
+}
 
-@font-face {
-	font-family: GEUVARA_.TTF; 
-	src: url('../fonts/GEUVARA_.TTF');
+#load{
+	visibility: hidden;
+}
+
+#register{
+	visibility: hidden;
 }
