@@ -1,65 +1,57 @@
-//tower class
+//loads the player base from melon js
 game.PlayerBaseEntity = me.Entity.extend({
-    init: function(x, y, settings){
-        //reachers the constructor function for tower
+    init : function(x, y, settings){
         this._super(me.Entity, 'init', [x, y, {
-            //settings. shoes the tower
             image: "tower",
-            //sets aside a width of 100 pixels for the tower
             width: 100,
-            //sets aside a height of 100 pixels for the tower
             height: 100,
-            //gives the tower a width of 100. 
-            spritewidth : "100",
-            //gives the tower a width of 100
+            spritewidth: "100",
             spriteheight: "100",
             getShape: function(){
-                //returns a rectangle of what the tower walks into
-                return(new me.Rect(0, 0, 100, 60)).toPolygon();
+                return (new me.Rect(0, 0, 100, 70)).toPolygon();
             }
         }]);
-        //says that tower hasn't been destroyed
+        //tells us the tower has not been destroyed
         this.broken = false;
-        //gives tower a "health" of ten
+        //gives the tower a health
+        //uses the global variable that helps the player base loose health
+        //variable located in game.js
         this.health = game.data.playerBaseHealth;
-        //makes sure the tower's status is always updating, eben when it isn't on the map
+        //even if we cannot see the screen it will still update
         this.alwaysUpdate = true;
-        //makes teh tower collidable
+        //if someone runs into the tower it will be able to collide
         this.body.onCollision = this.onCollision.bind(this);
-        //checks what player is running into
+
+        //type that can be used later during other collisons
         this.type = "PlayerBase";
-        //adds the defualt animatin for the game
+        //adds animation to the tower
         this.renderable.addAnimation("idle", [0]);
-        //adds the animation for when the tower is broken
         this.renderable.addAnimation("broken", [1]);
-        //sets the desfault animation
         this.renderable.setCurrentAnimation("idle");
-
-    },  
-
+    },
 
     update:function(delta){
-        //runs if health is less than or equal to 0
-        if(this.health <= 0){
-            //makes the tower "broken"
+        // tells us to die if health is less than zero
+        if(this.health<=0){
             this.broken = true;
+            //if the player is dead he will not win
             game.data.win = false;
-            //sets animation for "broken"
             this.renderable.setCurrentAnimation("broken");
-        } 
-        //updates tower status
+        }
         this.body.update(delta);
-        //updates
+
         this._super(me.Entity, "update", [delta]);
         return true;
     },
-    //runs whenever called on
+
+    //function for loosing health when attacking
     loseHealth: function(damage){
-        //subtracts set damage amount from health everytime ran
         this.health = this.health - damage;
+
     },
-    //function that runs when base is touched
+
     onCollision: function(){
 
     }
+
 });
