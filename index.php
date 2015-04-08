@@ -3,7 +3,6 @@
 <?php
 	require_once("php/controller/create-db.php");
 ?>
-
 <html>
 	<head>
 		<title>melonJS Template</title>
